@@ -1,0 +1,21 @@
+.content{
+    margin-top: -3rem;
+    .card-form{
+        max-width: 516px;
+        padding: 35px;  
+        margin-top: 1rem;
+        
+        .mat-form-field,
+        .mat-select-field{
+            width: 100%;
+        }
+    
+        .category-info{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            &:hover{
+                background-color: rgba($color: #000000, $alpha: 0.01);
+            }
+        }
+    }
+}

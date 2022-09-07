@@ -1,0 +1,19 @@
+td{
+    font-size: .8rem;
+    
+    .user-container{
+
+        display: flex;
+        align-items: center;
+        .user-img{
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+        }
+    
+        .user-name{
+            
+        }
+    }
+}

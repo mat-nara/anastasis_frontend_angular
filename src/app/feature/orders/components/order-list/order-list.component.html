@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="header">
+      <p class="mat-display-1 title">Commandes</p>
+    </div>
+    <div class="filter d-flex justify-content-between align-items-baseline">
+      <mat-form-field appearance="standard" floatLabel="always">
+        <mat-label>Rechercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="" #input >
+      </mat-form-field>
+      <div>
+        <button mat-raised-button routerLink="/orders/new" color="primary">Nouveau</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="wrapper">
+        <div class="mat-elevation-z1">
+          <table mat-table [dataSource]="ordersDataSource" matSort matSortDisableClear matSortDirection="desc">
+  
+            <!-- REFERENCE -->
+            <ng-container matColumnDef="REFERENCE">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> REFERENCE </th>
+              <td mat-cell *matCellDef="let order"> {{ order.REFERENCE }} </td>
+            </ng-container>
+  
+            <!-- author -->
+            <!--
+            <ng-container matColumnDef="author">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fait par </th>
+              <td mat-cell *matCellDef="let order"> {{ order.author }} </td>
+            </ng-container>
+            -->
+  
+            <!-- total -->
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Total [Ar]</th>
+              <td mat-cell *matCellDef="let order"> {{ order.total | FormatNumber }} </td>
+            </ng-container>
+
+            <!-- updatedAt -->
+            <ng-container matColumnDef="updatedAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Derniere modification</th>
+              <td mat-cell *matCellDef="let order"> {{ order.updated_at | date: 'd MMM y' }} </td>
+            </ng-container>
+  
+            <!-- Action -->
+            <ng-container matColumnDef="actions" >
+              <th mat-header-cell *matHeaderCellDef  class="actions"> Action </th>   
+              <td mat-cell *matCellDef="let order" class="actions"> 
+                <button mat-icon-button>
+                  <mat-icon (click)="onDownloadOrder(order.id)">file_download</mat-icon>
+                </button>
+                <button mat-icon-button>
+                  <mat-icon (click)="onViewOrder(order.id)">edit</mat-icon>
+                </button>
+                <button mat-icon-button>
+                  <mat-icon (click)="onDeleteOrder(order.REFERENCE, order.id)">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre "{{input.value}}"</td>
+            </tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>

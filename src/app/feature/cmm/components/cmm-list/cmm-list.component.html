@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="header">
+    <p class="mat-display-1 title">CMM</p>
+  </div>
+  <div class="filter d-flex justify-content-between align-items-baseline">
+    <mat-form-field appearance="standard" floatLabel="always">
+      <mat-label>Rechercher</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="" #input >
+    </mat-form-field>
+    <div>
+      <button mat-raised-button routerLink="/cmm/import" color="primary" class="me-1">Importer</button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="wrapper">
+      <div class="mat-elevation-z1">
+        <table mat-table [dataSource]="articleWithCMMsDataSource" matSort matSortDisableClear matSortDirection="desc">
+  
+           <!-- CODE -->
+           <ng-container matColumnDef="CODE">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> CODE </th>
+            <td mat-cell *matCellDef="let article"> {{article.CODE}} </td>
+          </ng-container>
+
+          <!-- laboratory_abr -->
+          <ng-container matColumnDef="laboratory_abr">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Laboratoire </th>
+            <td mat-cell *matCellDef="let article"> {{article.laboratory_abr}} </td>
+          </ng-container>
+
+          <!-- designation -->
+          <ng-container matColumnDef="designation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Designation </th>
+            <td mat-cell *matCellDef="let article"> {{ article.designation }} </td>
+          </ng-container>
+
+          <!-- col_1 -->
+          <ng-container matColumnDef="col_1">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> col_1 </th>
+            <td mat-cell *matCellDef="let article"> {{ article.col_1 }} </td>
+          </ng-container>
+
+          <!-- col_2 -->
+          <ng-container matColumnDef="col_2">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> col_2 </th>
+            <td mat-cell *matCellDef="let article"> {{ article.col_2 }} </td>
+          </ng-container>
+
+          <!-- col_3 -->
+          <ng-container matColumnDef="col_3">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> col_3 </th>
+            <td mat-cell *matCellDef="let article"> {{ article.col_3 }} </td>
+          </ng-container>
+
+          <!-- col_4 -->
+          <ng-container matColumnDef="col_4">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> col_4 </th>
+            <td mat-cell *matCellDef="let article"> {{ article.col_4 }} </td>
+          </ng-container>
+
+          <!-- col_5 -->
+          <ng-container matColumnDef="col_5">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> col_5 </th>
+            <td mat-cell *matCellDef="let article"> {{ article.col_5 }} </td>
+          </ng-container>
+
+          <!-- col_6 -->
+          <ng-container matColumnDef="col_6">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> col_6 </th>
+            <td mat-cell *matCellDef="let article"> {{ article.col_6 }} </td>
+          </ng-container>
+
+          <!-- cmm -->
+          <ng-container matColumnDef="cmm">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> cmm </th>
+            <td mat-cell *matCellDef="let article"> {{ article.cmm }} </td>
+          </ng-container>
+
+          <!-- Action -->
+          <ng-container matColumnDef="actions" >
+            <th mat-header-cell *matHeaderCellDef  class="actions"> Action </th>   
+            <td mat-cell *matCellDef="let article" class="actions"> 
+              <button mat-icon-button>
+                <mat-icon (click)="onViewCMM(article.CODE)">edit</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="article.is_set">
+                <mat-icon (click)="onDeleteCMM(article.designation, article.CODE)">delete</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="!article.is_set" style="visibility: hidden;">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre "{{input.value}}"</td>
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

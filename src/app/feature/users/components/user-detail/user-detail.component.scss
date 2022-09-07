@@ -1,0 +1,33 @@
+.select-image{
+  font-size: .8rem;
+}
+
+.select-image:hover{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.select-image{
+  margin-bottom: 2rem;
+}
+
+.user-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.card-form{
+  max-width: 516px;
+  padding: 35px;
+  text-align: left;
+
+  .email-field{
+    width: 100%;
+  }
+}
+
+.mat-form-field,
+.mat-select-field{
+  width: 100%;
+}

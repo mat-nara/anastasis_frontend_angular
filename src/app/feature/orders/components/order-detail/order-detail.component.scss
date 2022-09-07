@@ -1,0 +1,94 @@
+.table-all-article .mat-row:hover .mat-cell {
+    cursor: pointer;
+}
+
+.card-form{
+    max-width: 516px;
+    padding: 35px;
+    margin: 10px;
+    //box-shadow: none;
+  
+    .email-field{
+      width: 100%;
+    }
+}
+
+.mat-form-field,
+.mat-select-field{
+    width: 100%;
+}
+
+.filter{
+    margin-top: 0;
+}
+
+.field-qty,
+.field-type-transport{
+    width: 100px;
+}
+
+.container{
+    max-width: 1500px;
+    width: 1500px;
+    overflow: auto;
+}
+
+/********** Fixed column width *************/
+.cdk-column-select{
+    width: 70px;
+}
+
+.cdk-column-_code{
+    width: 150px;
+}
+
+.cdk-column-Laboratory{
+    width: 90px;
+}
+
+.cdk-column-designation{
+    width: 300px;
+}
+
+.cdk-column-PU{
+    width: 40px;
+}
+
+.cdk-column-DEV{
+    width: 60px;
+}
+
+
+
+
+.cdk-column-article{
+    width: 300px;
+}
+
+.cdk-column-Qty{
+    width: 100px;
+}
+
+.cdk-column-type_transport{
+    width: 150px;
+}
+
+/********** Fixed column width *************/
+
+.mat-form-field{
+    padding-top: .2rem !important;
+    margin-bottom: -.7rem !important;
+}
+
+.mat-cell,
+.mat-header-cell{
+    padding: 0 10px;
+}
+
+
+/******************/
+
+.field-total{
+    //text-align: right;
+    font-size: 1.2rem;
+}

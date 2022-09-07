@@ -1,0 +1,37 @@
+
+<mat-toolbar color="white" class="mat-elevation-z3 toolbar">
+  <span>Anastasis</span>
+  <span class="example-spacer"></span>
+  <button mat-button routerLink="/reports"          routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Rapport d'activité</button>
+  <button mat-button routerLink="/reports/globale"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Vue globale</button>
+  <button mat-button routerLink="/cmm"              routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >CMM</button>
+  <button mat-button routerLink="/stocks"           routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Stocks</button>
+  <button mat-button routerLink="/articles"         routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Articles</button>
+  <button mat-button routerLink="/laboratories"     routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Laboratoires</button>
+  <button mat-button routerLink="/orders"           routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Commandes</button>
+  <span class="example-spacer"></span>
+
+  <button *ngIf="activeVersion" mat-button [matMenuTriggerFor]="versionMenu">
+    {{ activeVersion.name }} 
+    <mat-icon>arrow_drop_down</mat-icon> 
+  </button>
+
+  <mat-menu #versionMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="onViewAllVersions()">Tous les versions</button>
+    <button mat-menu-item *ngFor="let version of versions" (click)="onChangeCurrentVersion(version.id)">{{ version.name }}</button>
+  </mat-menu>
+
+
+  <button mat-button [matMenuTriggerFor]="menu" class="user-menu">
+    <!--
+    <img [src]="user.imageUrl" width="35" height="35" class="user-img"/>
+    -->
+    <span class="name-user">{{ user.firstname }}</span>
+  </button>
+  <!-- Dropdown User Image -->
+  <mat-menu #menu="matMenu" class="menu-info-user flag-menu" xPosition="before">
+    <button mat-menu-item (click)="onViewAllUser()">Gestion des utilisateurs</button>
+    <button mat-menu-item (click)="onViewProfile()">Mon profile</button>
+    <button mat-menu-item (click)="onLogout()" >Déconnexion</button>
+  </mat-menu>
+</mat-toolbar>

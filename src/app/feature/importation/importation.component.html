@@ -1,0 +1,102 @@
+<div class="container-fluid page-body-wrapper">
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+          <h3 class="page-title coco">Importation d'un catalogue</h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <!--
+          <mat-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="infoGenFormGroup" label="Information général">
+              <form [formGroup]="infoGenFormGroup">
+                <div class="row my-5">
+                  <div class="form-group col-md-6">
+                    <label>Date de la catalogue</label>
+                    <input type="date" class="form-control"  formControlName="catalogue" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Séléctionnez le fichier</label>
+                    <input type="file" class="file-upload-default" (change)="showPreview($event)">
+                    <div class="input-group ">
+                      <input type="text" disabled="disabled" placeholder=".xlsx" class="form-control file-upload-info" >
+                      <span class="input-group-append">
+                        <button type="button" class="file-upload-browse btn btn-primary">Choisir</button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <button mat-raised-button matStepperNext>Suivant</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="localisationFormGroup" label="Localisation des données">
+              <form [formGroup]="localisationFormGroup">
+                <div class="row my-5">
+                  <div class="form-group col-md-6">
+                    <label>Dans quel feuille se trouve le fichier?</label>
+                    <select class="form-control" formControlName="sheetNumber">
+                      <option value="0">Feuille 1</option>
+                      <option value="1">Feuille 2</option>
+                      <option value="2">Feuille 3</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Quel est le numero du premier ligne de donnée? </label>
+                    <input type="number" class="form-control" placeholder="Premier ligne" formControlName="firstLine">
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <button mat-raised-button matStepperPrevious>Précédent</button>
+                  <button mat-raised-button matStepperNext class="mx-3">Suivant</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <form [formGroup]="configFormGroup">
+                <div class="row">
+                  <div class="form-group col-12">
+                    <label>S'agit t-il d'une configuration connue?</label>
+                    <select  class="form-control" formControlName="config">
+                      <option value="1">Configuration par defaut</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-6">
+                    <ul>
+                      <li>A: Code article</li>
+                      <li>B: Labs</li>
+                      <li>C: Designation</li>
+                      <li>D: CMM</li>
+                      <li>E: Stock réel à une date</li>
+                      <li>F: Stock en transit</li>
+                      <li>G: Date prévue d'arrivage</li>
+                    </ul>
+                  </div>
+                  <div class="col-6">
+                    <ul>
+                      <li>H: Date de passation de commande</li>
+                      <li>I: Delai de transit de la nouvelle commande</li>
+                      <li>J: PU</li>
+                      <li>K: Devise</li>
+                      <li>L: Collisage standard</li>
+                      <li>M: Poids</li>
+                      <li>N: Dimension</li>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+              <div class="d-flex justify-content-start">
+                <button mat-raised-button matStepperPrevious>Précédent</button>
+                <button mat-raised-button matStepperNext class="mx-3" (click)="onSubmitAllForm()">Terminer</button>
+              </div>
+            </mat-step>
+          </mat-stepper>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+/***************************** CONTAINER **************************/
+
+::ng-deep .container{
+
+    margin-top: 65px;
+
+    .header{
+        text-align: center;
+        padding: 64px;
+        .title{
+            margin: 0;
+        }
+       
+    }
+    .filter{
+        margin-top: -70px;
+    }
+    .content{
+        .border{
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            border: 1px solid #dadce0 !important;
+            padding: 1.5rem;
+        }
+    }
+}
+
+/***************************** TABLE **************************/
+
+::ng-deep table {
+    width: 100%;
+
+    .mat-cell{
+        font-size: .7rem !important;
+    }
+}
+
+::ng-deep .mat-row:hover .mat-cell {
+    background-color: rgba(0,0,0,.01);
+
+    .mat-icon-button{
+        visibility: visible;
+    }
+}
+
+::ng-deep .mat-column-actions{
+    width: 110px;
+    text-align: center !important;
+
+    .mat-icon-button{
+        visibility: hidden;
+        &:hover{
+            color: #3f51b5;
+        }
+    }
+}
+
+::ng-deep  .add-btn{
+    margin-right: 1.5rem;
+}
+
+::ng-deep .mat-chip{
+    font-size: .7rem !important;
+    font-weight: lighter;
+}
+
+
+/********************************************************/
+::ng-deep .text-right{
+    text-align: right;
+}
+
+::ng-deep .text-left{
+    text-align: left;
+}
+
+::ng-deep .btn-float{
+    position: fixed;
+    bottom: 34px;
+    right: 34px;
+}
+
+/*****************************************************/
+
+::ng-deep .new-order {
+    .mat-tab-group{
+
+        align-items: center;
+
+        .mat-tab-header{
+            width: 516px;
+        }
+
+        .mat-tab-body-wrapper{
+            padding-top: 3rem;
+            width: 100%;
+        }
+    }
+
+}
+        
+::ng-deep .hidden{
+    visibility: hidden;
+}

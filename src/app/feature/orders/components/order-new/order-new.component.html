@@ -1,0 +1,187 @@
+<div class="container">
+    <div class="header">
+      <p class="mat-display-1 title">Nouveau commande</p>
+    </div>
+    <div class="content new-order">  
+        <mat-tab-group dynamicHeight mat-stretch-tabs [selectedIndex]="selectedIndex" >
+          <mat-tab label="Information sur la commande">
+            <div class="row justify-content-center">   
+              <mat-card class="card-form mat-elevation-z1">
+                <form class="pt-3" *ngIf="orderForm" [formGroup]="orderForm">
+                  <h3>Créer une commande</h3>
+                  <h5>Simuler vos commande avec l'application Anastasis</h5>
+                  <div class="row">
+                    <div class="col-12">
+                      <mat-form-field appearance="outline" class="email-field">
+                        <mat-label>Reference</mat-label>
+                        <input matInput formControlName="reference">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col d-flex justify-content-end">
+                      <button mat-raised-button color="primary" (click)="checkValidity();">Suivant</button>
+                    </div>
+                  </div>
+                </form>
+              </mat-card>
+            </div>
+          </mat-tab>
+          <mat-tab label="Articles"> 
+            <div class="row" style="padding: 35px;">
+              <div class="col-6">
+                <h5>Tous les articles</h5>
+                <div class="filter">
+                  <mat-form-field appearance="standard" floatLabel="always">
+                    <mat-label>Rechercher</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="" #input >
+                  </mat-form-field>
+                </div>
+                <div class="wrapper mat-elevation-z1">
+                  <table mat-table [dataSource]="articlesDataSource" matSort matSortDisableClear matSortDirection="desc" class="table-all-article">
+      
+                      <!-- Checkbox Column -->
+                      <ng-container matColumnDef="select">
+                          <th mat-header-cell *matHeaderCellDef>
+                          </th>
+                          <td mat-cell *matCellDef="let row">
+                              <mat-checkbox   (click)="$event.stopPropagation()"
+                                              (change)="$event ? selection.toggle(row) : null;"
+                                              [checked]="selection.isSelected(row)"
+                                              >
+                              </mat-checkbox>
+                          </td>
+                      </ng-container>
+      
+                      <!-- CODE -->
+                      <ng-container matColumnDef="CODE">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> CODE </th>
+                        <td mat-cell *matCellDef="let article"> {{article.CODE}} </td>
+                      </ng-container>
+            
+                      <!-- Laboratory -->
+                      <ng-container matColumnDef="Laboratory">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Laboratoire </th>
+                        <td mat-cell *matCellDef="let article"> {{article.laboratory_abr}} </td>
+                      </ng-container>
+            
+                      <!-- designation -->
+                      <ng-container matColumnDef="designation">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Designation </th>
+                        <td mat-cell *matCellDef="let article"> {{article.designation}} </td>
+                      </ng-container>
+            
+                      <!-- PU -->
+                      <ng-container matColumnDef="PU">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> PU </th>
+                        <td mat-cell *matCellDef="let article"> {{article.PU}} </td>
+                      </ng-container>
+            
+                      <!-- DEV -->
+                      <ng-container matColumnDef="DEV">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DEV </th>
+                        <td mat-cell *matCellDef="let article"> {{article.DEV}} </td>
+                      </ng-container>
+        
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row); handleSelection(row);"></tr>
+        
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">Aucune donnée correspondant au filtre <!-- "{{ input.value}}" --></td>
+                  </tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                </div>
+              </div>
+              <div class="col-6">
+                <h5>Article sélectionner</h5>
+                <!------------------->
+                <div class="filter hidden">
+                  <mat-form-field appearance="standard" floatLabel="always">
+                    <mat-label>Rechercher</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="" #input >
+                  </mat-form-field>
+                </div>
+                <!------------------->
+                <div class="wrapper mat-elevation-z1">
+                  <table mat-table [dataSource]="orderedArticlesDataSource" >
+    
+                    <!-- article -->
+                    <ng-container matColumnDef="article">
+                      <th mat-header-cell *matHeaderCellDef> Article </th>
+                      <td mat-cell *matCellDef="let article"> {{article.designation}}</td>
+                    </ng-container>
+          
+                    <!-- Qty -->
+                    <ng-container matColumnDef="Qty">
+                      <th mat-header-cell *matHeaderCellDef> Qty </th>
+                      <td mat-cell *matCellDef="let article"> 
+                        <mat-form-field appearance="outline" class="field-qty">
+                          <mat-label></mat-label>
+                          <input matInput type="number" min="0" (change)="onQtyChange($event, article.CODE)" />
+                        </mat-form-field>  
+                      </td>
+                    </ng-container>
+          
+                    <!-- PU -->
+                    <ng-container matColumnDef="PU">
+                      <th mat-header-cell *matHeaderCellDef> PU </th>
+                      <td mat-cell *matCellDef="let article"> {{article.PU}} </td>
+                    </ng-container>
+          
+                    <!-- DEV -->
+                    <ng-container matColumnDef="DEV">
+                      <th mat-header-cell *matHeaderCellDef> DEV </th>
+                      <td mat-cell *matCellDef="let article"> {{article.DEV}} </td>
+                    </ng-container>
+  
+                    <!-- type_transport -->
+                    <ng-container matColumnDef="type_transport">
+                      <th mat-header-cell *matHeaderCellDef> Type de transport </th>
+                      <td mat-cell *matCellDef="let article"> 
+                        <mat-form-field appearance="outline" class="field-type-transport">
+                          <mat-label></mat-label>
+                          <mat-select (selectionChange)="onTypeChange($event, article.CODE)" >
+                            <mat-option value="Avion">Avion</mat-option>
+                            <mat-option value="Bateau">Bateau</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                    </ng-container>
+                    
+                    <!-- actions -->
+                    <ng-container matColumnDef="actions" >
+                      <th mat-header-cell *matHeaderCellDef  class="actions"> Action </th>   
+                      <td mat-cell *matCellDef="let row" class="actions"> 
+                        <button mat-icon-button>
+                          <mat-icon (click)="selection.toggle(row);handleSelection(row);">delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+      
+                    <tr mat-header-row *matHeaderRowDef="selectedDisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: selectedDisplayedColumns;" ></tr>
+          
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">Aucune article sélectionner</td>
+                    </tr>
+                  </table>
+                </div>
+                <mat-form-field appearance="outline" floatLabel="always" class="mt-4">
+                  <mat-label>Total [en Ariary]</mat-label>
+                  <input class="field-total" matInput placeholder="" value="{{ Total | FormatNumber }}">
+                </mat-form-field>
+                <div class="row mt-4">
+                  <div class="col d-flex justify-content-between">
+                    <button mat-raised-button color="primary" (click)="toStep(0);">Précedent</button>
+                    <button mat-raised-button color="primary" (click)="onSubmitOrder()">Enregistrer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+    </div>
+  </div>

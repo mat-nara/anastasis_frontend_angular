@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="header">
+    <p class="mat-display-1 title">Détail Laboratoire</p>
+  </div>
+  <div class="content">
+    <div class="row justify-content-center">   
+      <mat-card class="card-form">
+        <h3>Information sur le laboratoire</h3>
+        <h5>Collaborer avec vos laboratoires</h5>
+        <form class="pt-3" *ngIf="laboratoryForm" [formGroup]="laboratoryForm">
+          <div class="row">
+            <div class="col">
+              <mat-form-field appearance="outline">
+                <mat-label>Abréviation</mat-label>
+                <input matInput formControlName="ABR" [readonly]="true">
+                <mat-error *ngIf="checkError(laboratoryForm, 'ABR', 'required')">Champ obligatoire</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input matInput  formControlName="name">
+                <mat-error *ngIf="checkError(laboratoryForm, 'name', 'required')">Champ obligatoire</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="outline">
+                <mat-label>coef</mat-label>
+                <input matInput  formControlName="coef" type="number">
+                <mat-error *ngIf="checkError(laboratoryForm, 'coef', 'required')">Champ obligatoire</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="outline">
+                <mat-label>Délai de transit de la nouvelle commande</mat-label>
+                <input matInput formControlName="delai_de_transit_de_la_nouvelle_commande" type="number">
+                <mat-error *ngIf="checkError(laboratoryForm, 'delai_de_transit_de_la_nouvelle_commande', 'required')">Champ obligatoire</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col d-flex justify-content-between">
+              <button mat-button color="primary" (click)="backToList()">Retour à la liste</button>
+              <button mat-raised-button color="primary" (click)="onSubmitForm()">Modifier</button>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<h2 mat-dialog-title>Récapitulatif</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-6 pr-2">
+        <table mat-table [dataSource]="sumDataSource">
+
+
+          <!------------------------- First  Header ----------------------->
+
+          <!-- LABS -->
+          <ng-container matColumnDef="LABS">
+            <th mat-header-cell class="labs-header first-header-th" *matHeaderCellDef [attr.colspan]="1"></th>
+          </ng-container>
+
+          <!-- DECISION -->
+          <ng-container matColumnDef="DECISION">
+            <th mat-header-cell class="text-center first-header-th" *matHeaderCellDef [attr.colspan]="2">DECISION</th>
+          </ng-container>
+        
+          <!-- PROP_DIRAPPRO -->
+          <ng-container matColumnDef="PROP_DIRAPPRO">
+            <th mat-header-cell class="text-center first-header-th" *matHeaderCellDef [attr.colspan]="2">PROPOSITION DIRAPPRO</th>
+          </ng-container>
+
+
+          <!------------------------- Second  Header ----------------------->
+
+          <!-- Labs -->
+          <ng-container matColumnDef="labs">
+            <th mat-header-cell class="labs-second-header" *matHeaderCellDef>LABS</th>
+            <td mat-cell class="text-center" *matCellDef="let sum"> {{ sum.labs }} </td>
+            <td mat-footer-cell class="total-footer text-center" *matFooterCellDef> TOTAL </td>
+          </ng-container>
+          
+          <!-- decision_eur -->
+          <ng-container matColumnDef="decision_eur">
+            <th mat-header-cell *matHeaderCellDef>EUR</th>
+            <td mat-cell *matCellDef="let sum"> {{ sum.decision.EUR | FormatNumber }} </td>
+            <td mat-footer-cell class="total-footer" *matFooterCellDef> {{ total.sum_dec_eur | FormatNumber }} </td>
+          </ng-container>
+
+          <!-- decision_usd -->
+          <ng-container matColumnDef="decision_usd">
+            <th mat-header-cell *matHeaderCellDef>USD</th>
+            <td mat-cell *matCellDef="let sum"> {{ sum.decision.USD | FormatNumber }} </td>
+            <td mat-footer-cell class="total-footer" *matFooterCellDef> {{ total.sum_dec_usd | FormatNumber }} </td>
+          </ng-container>
+
+          <!-- dirappro_eur -->
+          <ng-container matColumnDef="dirappro_eur">
+            <th mat-header-cell *matHeaderCellDef>EUR</th>
+            <td mat-cell *matCellDef="let sum"> {{ sum.proposition.EUR | FormatNumber }} </td>
+            <td mat-footer-cell class="total-footer" *matFooterCellDef> {{ total.sum_prop_eur | FormatNumber }} </td>
+          </ng-container>
+
+          <!-- dirappro_usd -->
+          <ng-container matColumnDef="dirappro_usd">
+            <th mat-header-cell *matHeaderCellDef>USD</th>
+            <td mat-cell *matCellDef="let sum"> {{ sum.proposition.USD | FormatNumber }} </td>
+            <td mat-footer-cell class="total-footer" *matFooterCellDef> {{ total.sum_prop_usd | FormatNumber }} </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="['LABS', 'DECISION', 'PROP_DIRAPPRO']"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true;"></tr>
+        </table>
+    </div>
+    <div class="col-6" *ngIf="coursDevise.usd_ar && coursDevise.eur_ar">
+      <h3>Conversion:</h3>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>USD</mat-label>
+                <input matInput type="number" value="1">
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Ariary</mat-label>
+                <input matInput type="number" (change)="setSommeTotalAr()" [(ngModel)]="coursDevise.usd_ar">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>EUR</mat-label>
+                <input matInput type="number" value="1">
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Ariary</mat-label>
+                <input matInput type="number" (change)="setSommeTotalAr()" [(ngModel)]="coursDevise.eur_ar">
+              </mat-form-field>
+            </div>
+          </div>   
+          <div class="row total-row" *ngIf="total.decision">
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Total somme decision : (en ariary)</mat-label>
+                <input matInput class="total-mat-input" [value]="total.decision">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" *ngIf="total.proposition">
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Total somme Proposition DIRAPPRO : (en ariary)</mat-label>
+                <input matInput class="total-mat-input" [value]="total.proposition">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

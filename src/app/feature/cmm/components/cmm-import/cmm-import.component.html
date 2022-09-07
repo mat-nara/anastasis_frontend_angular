@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="header">
+      <p class="mat-display-1 title">Import du CMM</p>
+    </div>
+    <div class="content">
+        <div class="row justify-content-center">   
+            <mat-card class="card-form p-4">
+                <h3>Importer le CMM de vos articles</h3>
+                <h5>Alimenter votre logiciel Anastasis</h5>
+                <form class="py-4" *ngIf="importForm" [formGroup]="importForm">
+                    <div class="row">
+                        <div class="col-3">
+                            <!--<p>Suivez ce modele:</p>-->
+                            <button mat-raised-button color="primary" (click)="downloadModel($event)">Télécharger le modele</button>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nom du versionnage</mat-label>
+                                <input matInput value="{{ version.name }}" [readonly]="true">
+                            </mat-form-field>
+                            <div class="file-selector" (click)="excelInputFile.click()">
+                                <span id="file-selector-label" class="file-selector-label">Choisissez le fichier à importer</span>
+                            </div>
+                            <input class="d-none" type="file"  #excelInputFile (change)="onFilechange($event, 'file-selector-label')">
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                </form>
+                <mat-card-actions class="d-flex justify-content-between mt-5">
+                    <button mat-button color="primary" (click)="backToList()">Retour à la liste</button>
+                    <button mat-raised-button color="primary" (click)="onSubmitForm($event)">Importer</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

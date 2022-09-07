@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="header">
+    <p class="mat-display-1 title">Laboratoires</p>
+  </div>
+  <div class="content">
+    <div class="wrapper border">
+      <table mat-table [dataSource]="laboratoriesDataSource">
+
+        <!-- Abreviation -->
+        <ng-container matColumnDef="ABR">
+          <th mat-header-cell *matHeaderCellDef>Abréviation</th>
+          <td mat-cell *matCellDef="let laboratory"> {{ laboratory.ABR  }}  </td>
+        </ng-container>
+  
+        <!-- Nom -->
+         <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nom</th>
+          <td mat-cell *matCellDef="let laboratory"> {{ laboratory.name  }}  </td>
+        </ng-container>
+  
+        <!-- Coefficient -->
+        <ng-container matColumnDef="coef">
+          <th mat-header-cell *matHeaderCellDef>Coefficient</th>
+          <td mat-cell *matCellDef="let laboratory"> {{ laboratory.coef  }}  </td>
+        </ng-container>
+  
+        <!-- delai_de_transit_de_la_nouvelle_commande -->
+        <ng-container matColumnDef="delai_de_transit_de_la_nouvelle_commande">
+          <th mat-header-cell *matHeaderCellDef>Délai de transit de la nouvelle commande</th>
+          <td mat-cell *matCellDef="let laboratory"> {{ laboratory.delai_de_transit_de_la_nouvelle_commande  }}  </td>
+        </ng-container>
+      
+        <!-- Action -->
+        <ng-container matColumnDef="actions" >
+          <th mat-header-cell *matHeaderCellDef     class="actions"> Action </th>   
+          <td mat-cell *matCellDef="let laboratory" class="actions"> 
+            <button mat-icon-button>
+              <mat-icon (click)="onViewLaboratory(laboratory.ABR)">edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon (click)="onDeleteLaboratory(laboratory.name, laboratory.ABR)">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div class="add-btn d-flex justify-content-end mt-3">
+        <button (click)="onAddLaboratory()" mat-raised-button color="primary">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>

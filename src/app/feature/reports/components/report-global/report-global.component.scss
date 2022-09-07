@@ -1,0 +1,86 @@
+/***************************** CONTAINER **************************/
+
+.container{
+
+  margin-top: 65px;
+  max-width: 100% !important;
+  //overflow: scroll;
+
+  .header{
+      text-align: center;
+      padding: 64px;
+      .title{
+          margin: 0;
+      }
+  }
+
+  .filter{
+      margin-top: -70px;
+  }
+
+  .content{
+      .table-wrapper{
+          -moz-border-radius: 8px;
+          border-radius: 8px;
+          border: 1px solid #dadce0 !important;
+          padding: 0;
+          padding-bottom: 2rem;
+          width: 100%;
+          //height: 75vh;
+          overflow-y: hidden;
+          overflow-x: scroll;
+
+          .mat-table{
+            width: 240% !important;
+            border-collapse: separate;
+              
+              .mat-cell,
+              .mat-header-cell{
+                padding: 0 10px;
+                background-color: white;
+                border-bottom-color: rgba(0, 0, 0, 0.12);
+              }
+          }
+      }
+  }
+}
+
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: rgb(250, 250, 250) !important;
+}
+
+/********************* CHIPS (BADGE) **********************/
+
+.mat-standard-chip{
+  min-height: 28px;
+}
+
+.bg-white{
+  background-color: white;
+}
+.bg-yellow{
+  background-color: yellow;
+}
+.bg-orange{
+  background-color: orange;
+  color: white;
+}
+.bg-red{
+  background-color: red;
+  color: white;
+}
+
+
+
+.mat-form-field{
+  padding-top: .2rem !important;
+  margin-bottom: -.7rem !important;
+}

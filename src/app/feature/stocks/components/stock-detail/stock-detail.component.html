@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="header">
+    <p class="mat-display-1 title">Détail Stock</p>
+  </div>
+  <div class="content">
+      <div class="row justify-content-center">   
+          <mat-card class="card-form">
+              <h3>Metter à jour l'état de vos stocks</h3>
+              <h5>Alimenter votre logiciel Anastasis</h5>
+              <form class="pt-3" *ngIf="stockForm" [formGroup]="stockForm">
+                  <div class="row category-info">
+                    <h5>Article</h5>
+                      <div class="col-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Code Article</mat-label>
+                              <input matInput [readonly]="true" value="{{ articleCode }}">
+                          </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Désignation</mat-label>
+                              <input matInput [readonly]="true" value="{{ articleDesignation }}">
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row category-info">
+                      <h5>Etat du stock</h5>
+                      <div class="col-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Stock réel à une date</mat-label>
+                              <input matInput type="number" formControlName="stock_reel_a_une_date">
+                              <mat-error *ngIf="checkError(stockForm, 'stock_reel_a_une_date', 'required')">Champ obligatoire</mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Stock réel à une date</mat-label>
+                          <input matInput type="number" formControlName="stock_en_transit">
+                          <mat-error *ngIf="checkError(stockForm, 'stock_en_transit', 'required')">Champ obligatoire</mat-error>
+                        </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row category-info">
+                      <h5>Date et transport</h5>
+                      <!--
+                      <div class="col-12">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Type du transport</mat-label>
+                          <mat-select formControlName="type_transport">
+                            <mat-option value="Avion">Avion</mat-option>
+                            <mat-option value="Bateau">Bateau</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      -->
+                      <div class="col-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Date prévue d'arrivage</mat-label>
+                          <input matInput type="date" formControlName="date_prevu_arrivage">
+                          <mat-error *ngIf="checkError(stockForm, 'date_prevu_arrivage', 'required')">Champ obligatoire</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Date de passation de commande</mat-label>
+                          <input matInput type="date" formControlName="date_de_passation_de_commande">
+                          <mat-error *ngIf="checkError(stockForm, 'date_de_passation_de_commande', 'required')">Champ obligatoire</mat-error>
+                        </mat-form-field>
+                      </div>
+                  </div>
+                  <mat-card-actions class="d-flex justify-content-between mt-3 mb-0">
+                      <button mat-button color="primary" (click)="backToList()">Retour à la liste</button>
+                      <button mat-raised-button color="primary" (click)="onSubmitForm()">Mise a jour</button>
+                  </mat-card-actions>
+              </form>
+          </mat-card>
+      </div>
+  </div>  
+</div>

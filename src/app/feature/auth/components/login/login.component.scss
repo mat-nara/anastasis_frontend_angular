@@ -1,0 +1,26 @@
+.btn-login{
+  height: auto !important;
+}
+
+.az-logo{
+  font-size: 3rem;
+  color: var(--prim );
+}
+
+.navbar-brand{
+  cursor: default;
+}
+
+.card-form{
+  max-width: 456px;
+  padding: 35px;
+
+  .email-field{
+    width: 100%;
+  }
+}
+
+.mat-form-field,
+.mat-select-field{
+  width: 100%;
+}

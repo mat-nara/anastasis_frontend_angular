@@ -1,0 +1,41 @@
+
+.add-group{
+    margin-top: -56px;
+}
+
+/*****************      Search Input   **************/
+
+
+.search-input{
+  width: 300px;
+  border: 1px solid #EEE !important;
+  color: #BBB;
+}
+
+.search-input::placeholder{
+  color: rgba(0,0,0,0.2) !important;
+}
+
+.search-input:focus-visible{
+  text-shadow: 0 0 0 rgba(0,0,0,0.2) !important;
+}
+
+/*****************      Table Fix Head   **************/
+
+.tableFixHead {
+  overflow-y: auto;
+  height: 70vh;
+  scrollbar-width: none;
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding-bottom: 1.5rem !important;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
