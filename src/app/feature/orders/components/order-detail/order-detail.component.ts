@@ -35,7 +35,11 @@ export class OrderDetailComponent implements OnInit {
   changedQty: any  = {};
   changedType: any = {};
 
-  Total: any = 0;
+  Total: any = {
+    MGA: 0,
+    EUR: 0,
+    USD: 0
+  };
   Currency!: any;
 
   constructor(
@@ -49,7 +53,7 @@ export class OrderDetailComponent implements OnInit {
                 private formBuilder: FormBuilder,
                 ) { }
 
-    ngOnInit(): void {
+     ngOnInit(): any {
 
       /** Load all available articles **/
       this.articleService.getAllArticles().subscribe(
@@ -70,8 +74,16 @@ export class OrderDetailComponent implements OnInit {
                 reference: [{value: data['REFERENCE'], disabled: true}, [Validators.required]],
               });
 
-              this.loadSelectedArticleData(data);
-              this.evaluateTotal();
+             
+              this.setCurrency().then(
+                () => {
+                  this.loadSelectedArticleData(data);
+                }
+              ).catch(
+                (e)=>{
+                  this.toastrService.error("Une erreur est survenu devise OANDA.");
+                }
+              )              
               
             }, (error) => {
               this.toastrService.error("Une erreur est survenu.");
@@ -83,8 +95,6 @@ export class OrderDetailComponent implements OnInit {
           this.toastrService.error(response.error.message);
         }
       )
-
-      this.setCurrency();
 
     }
 
@@ -109,6 +119,8 @@ export class OrderDetailComponent implements OnInit {
       this.selection                  = new SelectionModel<Article>(true, selected);
       this.orderedArticlesDataSource  = new MatTableDataSource<Article>(this.selection.selected);
       this.selectedDisplayedColumns   = ['article', 'Qty','PU', 'DEV', 'type_transport', 'actions']; 
+      
+      this.evaluateTotal();
     }
 
     
@@ -150,14 +162,17 @@ export class OrderDetailComponent implements OnInit {
     evaluateTotal(){
 
       var currency  = 0;
-      this.Total    = 0;
+      var TotalMGA  = 0;
       this.selection.selected.forEach((article: any) => {
         if(this.changedQty[article.CODE]){
-          currency     = article.DEV == 'USD'? this.Currency.usd : this.Currency.eur; 
-          this.Total  += this.changedQty[article.CODE] * article.PU * currency;
+          currency   = article.DEV == 'USD'? this.Currency.usd : this.Currency.eur; 
+          TotalMGA  += this.changedQty[article.CODE] * article.PU * currency;
         }
       });
-      this.Total = Math.round(this.Total);
+
+      this.Total.MGA = Math.round(TotalMGA * 100) / 100;
+      this.Total.EUR = Math.round(TotalMGA / this.Currency.eur * 100) / 100;
+      this.Total.USD = Math.round(TotalMGA / this.Currency.usd * 100) / 100;
     }
 
 

@@ -102,3 +102,9 @@
 ::ng-deep .hidden{
     visibility: hidden;
 }
+
+
+/******************************   Mat-tooltip   **********************************/
+::ng-deep .mat-tooltip  {
+    white-space: pre-line !important;
+  }

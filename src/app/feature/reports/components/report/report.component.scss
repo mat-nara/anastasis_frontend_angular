@@ -59,6 +59,10 @@
   background-color: rgb(250, 250, 250) !important;
 }
 
+.mat-header-cell:hover{
+  cursor: pointer;
+}
+
 /********************* CHIPS (BADGE) **********************/
 
 .mat-standard-chip{

@@ -5,6 +5,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { ReportService } from 'src/app/core/services/report.service';
 import { PropDirApproService } from 'src/app/core/services/propdirappro.service';
 import { GlobalStorageService } from 'src/app/core/services/global-storage.service';
+import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -33,18 +34,23 @@ export class ReportComponent implements OnInit {
   changedDirapproQECBoiteList!: any;
   propChanged!: boolean;
 
+  lastStockUpdate!: any; 
 
   constructor(
                 private globalStorageService: GlobalStorageService,
                 private reportService: ReportService,
                 private propDirApproService: PropDirApproService,
                 private toastrService: ToastrService,
-                public sumDialog: MatDialog
+                public sumDialog: MatDialog,
+                private router: Router,
                   ) { }
 
     ngOnInit(): void {
 
       this.version = this.globalStorageService.get('ActiveVersion', true)!;
+      if(this.version == null){
+        this.router.navigateByUrl('/reports');
+      }
       this.loadReportData(this.version.id);
 
       this.changedDirapproQECBoiteList = {};      
@@ -71,6 +77,8 @@ export class ReportComponent implements OnInit {
             labsSum:    data.sum,
             overallSum: data.allsum
           }
+
+          this.lastStockUpdate = data.last_stock_update;
           
         }, (error) => {
           this.toastrService.error("Une erreur est survenu.");

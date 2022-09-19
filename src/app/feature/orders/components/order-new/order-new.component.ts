@@ -40,7 +40,11 @@ export class OrderNewComponent implements OnInit {
 
   selection = new SelectionModel<Article>(true, []);
 
-  Total: any = 0;
+  Total: any = {
+    MGA: 0,
+    EUR: 0,
+    USD: 0
+  };
   Currency!: any;
 
   constructor(
@@ -123,14 +127,17 @@ export class OrderNewComponent implements OnInit {
     evaluateTotal(){
 
       var currency  = 0;
-      this.Total    = 0;
+      var TotalMGA  = 0;
       this.selection.selected.forEach((article: any) => {
         if(this.changedQty[article.CODE]){
-          currency     = article.DEV == 'USD'? this.Currency.usd : this.Currency.eur; 
-          this.Total  += this.changedQty[article.CODE] * article.PU * currency;
+          currency  = article.DEV == 'USD'? this.Currency.usd : this.Currency.eur; 
+          TotalMGA += this.changedQty[article.CODE] * article.PU * currency;
         }
       });
-      this.Total = Math.round(this.Total);
+
+      this.Total.MGA = Math.round(TotalMGA* 100) / 100;
+      this.Total.EUR = Math.round(TotalMGA / this.Currency.eur * 100) / 100;
+      this.Total.USD = Math.round(TotalMGA / this.Currency.usd * 100) / 100;
     }
 
     onSubmitOrder(){

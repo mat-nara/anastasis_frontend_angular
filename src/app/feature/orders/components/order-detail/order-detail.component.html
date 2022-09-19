@@ -169,10 +169,26 @@
                     </tr>
                   </table>
                 </div>
-                <mat-form-field appearance="outline" floatLabel="always" class="mt-4">
-                  <mat-label>Total [en Ariary]</mat-label>
-                  <input class="field-total" matInput placeholder="" value="{{ Total | FormatNumber }}">
-                </mat-form-field>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field appearance="outline" floatLabel="always" class="mt-4">
+                      <mat-label>Total [en Ariary]</mat-label>
+                      <input class="field-total" matInput placeholder="" value="{{ Total.MGA | FormatNumber }}">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field appearance="outline" floatLabel="always" class="mt-4">
+                      <mat-label>Total [en EUR]</mat-label>
+                      <input class="field-total" matInput placeholder="" value="{{ Total.EUR | FormatNumber }}">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field appearance="outline" floatLabel="always" class="mt-4">
+                      <mat-label>Total [en USD]</mat-label>
+                      <input class="field-total" matInput placeholder="" value="{{ Total.USD | FormatNumber }}">
+                    </mat-form-field>
+                  </div>
+                </div>
                 <div class="row mt-4">
                   <div class="col d-flex justify-content-between">
                     <button mat-raised-button color="primary" (click)="toStep(0);">Précedent</button>

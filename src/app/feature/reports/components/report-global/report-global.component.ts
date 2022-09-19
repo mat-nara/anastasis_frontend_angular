@@ -31,6 +31,7 @@ export class ReportGlobalComponent implements OnInit {
   changedDirapproQECBoiteList!: any;
   propChanged!: boolean;
 
+  lastStockUpdate!: any;
 
   constructor(
                 private globalStorageService: GlobalStorageService,
@@ -110,13 +111,8 @@ export class ReportGlobalComponent implements OnInit {
             overallSum: data.allsum
           }
           
-
-          //this.allReports = data.reports;
-
-
-          //this.groupedSum = data.sum;
-          //this.allSum     = data.allsum;
-          //this.setSommeTotalAr();
+          this.lastStockUpdate = data.last_stock_update;
+          
         }, (error) => {
           this.toastrService.error("Une erreur est survenu.");
           console.log(error)

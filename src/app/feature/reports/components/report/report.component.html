@@ -40,13 +40,19 @@
 
         <!-- cmm -->
         <ng-container matColumnDef="cmm">
-          <th mat-header-cell *matHeaderCellDef>CMM</th>
+          <th mat-header-cell 
+          [matTooltip]="'CMM: \n&nbsp; (somme 6 colonnes)  / \n&nbsp; (6 - (nbre de jour rupture/30,5) )'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>CMM</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.cmm }} </td>
         </ng-container>
 
         <!-- fmr -->
         <ng-container matColumnDef="fmr">
-          <th mat-header-cell *matHeaderCellDef>FMR</th>
+          <th mat-header-cell 
+          [matTooltip]="'FMR:  \n&nbsp; Si (CMM < 1000) : Faible rotation \n&nbsp; Sinon Si (2000 <= CMM): Forte rotation  \n&nbsp;&nbsp;&nbsp;&nbsp; Sinon: Moyen rotation'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>FMR</th>
           <td mat-cell *matCellDef="let article">
             <container-element [ngSwitch]="article.rotation_de_stocks.fmr">
               <mat-chip-list>
@@ -60,31 +66,46 @@
 
         <!-- stock_min -->
         <ng-container matColumnDef="stock_min">
-          <th mat-header-cell *matHeaderCellDef>Stock min</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock min:  \n&nbsp; Si (FMR == Faible rotation) : CMM * 1 \n&nbsp; Sinon Si (FMR == Moyen rotation): CMM * 1.5  \n&nbsp;&nbsp;&nbsp;&nbsp; Sinon: CMM * 1.5'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock min</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_min }} </td>
         </ng-container>
 
         <!-- stock_max -->
         <ng-container matColumnDef="stock_max">
-          <th mat-header-cell *matHeaderCellDef>Stock max</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock max:  \n&nbsp; Si (FMR == Faible rotation) : CMM * 2 \n&nbsp; Sinon Si (FMR == Moyen rotation): CMM * 3  \n&nbsp;&nbsp;&nbsp;&nbsp; Sinon: CMM * 4'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock max</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_max }} </td>
         </ng-container>
 
         <!-- stock_reel_a_une_date -->
         <ng-container matColumnDef="stock_reel_a_une_date">
-          <th mat-header-cell *matHeaderCellDef>Stock réel à une date</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock réel à une date: \nImporté depuis Stock'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock réel du {{ lastStockUpdate  | date: 'd/MM/y'  }}</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_reel_a_une_date }} </td>
         </ng-container>
 
         <!-- stock_dispo -->
         <ng-container matColumnDef="stock_dispo">
-          <th mat-header-cell *matHeaderCellDef>Stock dispo</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock dispo: \n&nbsp; Si (CMM != 0)  arondir(Stock réel à une date / CMM) \n&nbsp; Sinon: 0 '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock dispo</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_dispo }} </td>
         </ng-container>
 
         <!-- etat_reel -->
         <ng-container matColumnDef="etat_reel">
-          <th mat-header-cell *matHeaderCellDef>Etat réel</th>
+          <th mat-header-cell 
+          [matTooltip]="'Etat réel: \n&nbsp; Si (Stock réel à une date <= 5): Rupture \n&nbsp; Sinon Si ( \n&nbsp;&nbsp;(Stock réel à une date > Stock max) ET \n&nbsp;&nbsp;(Stock dispo > 6) ): Surstock \n&nbsp;&nbsp;&nbsp;&nbsp; Sinon: vide'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Etat réel</th>
           <td mat-cell *matCellDef="let article"> 
             <container-element [ngSwitch]="article.rotation_de_stocks.etat_reel">
               <mat-chip-list>
@@ -97,35 +118,48 @@
 
         <!-- stock_en_transit -->
         <ng-container matColumnDef="stock_en_transit">
-          <th mat-header-cell *matHeaderCellDef>Stock en transit</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock en transit: \nImporté depuis Stock'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock en transit</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_en_transit }} </td>
         </ng-container>
 
         <!-- date_prevu_arrivage -->
         <ng-container matColumnDef="date_prevu_arrivage">
-          <th mat-header-cell *matHeaderCellDef>Date prévu d'arrivage</th>
+          <th mat-header-cell 
+          [matTooltip]="'Date prévu d\'arrivage: \nImporté depuis Stock'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Date prévu d'arrivage</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.date_prevu_arrivage  | date: 'd MMM y'  }} </td>
         </ng-container>
 
         <!-- stock_a_terme -->
         <ng-container matColumnDef="stock_a_terme">
-          <th mat-header-cell *matHeaderCellDef>Stock à terme</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock à terme: \n(Stock réel à une date + Stock en transit)'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock à terme</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_a_terme }} </td>
         </ng-container>
 
         <!-- stock_a_terme_mois -->
         <ng-container matColumnDef="stock_a_terme_mois">
-          <th mat-header-cell *matHeaderCellDef>Stock à terme [mois]</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock à terme [mois]: \n&nbsp; Si (CMM != 0):  \n&nbsp;&nbsp;&nbsp; arondir_superieur(Stock à terme / CMM) \n&nbsp; Sinon: 0 '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock à terme [mois]</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.stock_a_terme_mois }} </td>
         </ng-container>
 
         <!-- observation -->
         <ng-container matColumnDef="observation">
-          <th mat-header-cell *matHeaderCellDef>observation</th>
+          <th mat-header-cell 
+          [matTooltip]="'Observation: \n&nbsp; Si (Stock dispo == Stock à terme [mois]):  \n&nbsp;&nbsp;&nbsp; Pourquoi \n&nbsp; Sinon: vide '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Observation</th>
           <td mat-cell *matCellDef="let article"> {{ article.rotation_de_stocks.observation }} </td>
         </ng-container>
-
-
 
 
          <!--******************************   DECISION   **************************-->
@@ -133,55 +167,82 @@
 
         <!-- stock_de_securite -->
         <ng-container matColumnDef="stock_de_securite">
-          <th mat-header-cell *matHeaderCellDef>Stock de sécurite</th>
+          <th mat-header-cell 
+          [matTooltip]="'Stock de sécurite: \n&nbsp; (Stock de sécurite *  \n&nbsp; delai de transit de la nouvelle commande) \n\n&nbsp; Importé depuis Laboratoire'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Stock de sécurite</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.stock_de_securite }} </td>
         </ng-container>
 
         <!-- QEC_theorique_boite -->
         <ng-container matColumnDef="QEC_theorique_boite">
-          <th mat-header-cell *matHeaderCellDef>QEC théorique [boite]</th>
+          <th mat-header-cell 
+          [matTooltip]="'QEC théorique [boite]: \n&nbsp; Stock max - (Stock à terme + Stock de securite); \n\n&nbsp; Si (QEC théorique [boite] > 0): garder sa valeur \n&nbsp; Sinon: 0 '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>QEC théorique [boite]</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.QEC_theorique_boite }} </td>
         </ng-container>
 
         <!-- QEC_boites_decision -->
         <ng-container matColumnDef="QEC_boites_decision">
-          <th mat-header-cell *matHeaderCellDef>QEC boîtes décision</th>
+          <th mat-header-cell 
+          [matTooltip]="'QEC boîtes décision: \n&nbsp; Si ( \n&nbsp;&nbsp;&nbsp; (Colisage standard == vide) OU \n&nbsp;&nbsp;&nbsp; (FMR == Faible Rotation)): \n&nbsp;&nbsp;&nbsp; arondir_superieur(QEC theorique boite, 1) \n&nbsp; Sinon Si(Colisage standard != 0): \n&nbsp;&nbsp;&nbsp; Colisage standard * \n&nbsp;&nbsp;&nbsp; arondir_superieur(QEC theorique boite / \n&nbsp;&nbsp;&nbsp; Colisage standard) \n&nbsp;&nbsp;&nbsp; Sinon: 0  '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>QEC boîtes décision</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.QEC_boites_decision }} </td>
         </ng-container>
 
         <!-- QEC_cartons_decision -->
         <ng-container matColumnDef="QEC_cartons_decision">
-          <th mat-header-cell *matHeaderCellDef>QEC cartons décision</th>
+          <th mat-header-cell 
+          [matTooltip]="'QEC cartons décision: \n&nbsp; Si (Colisage standard != 0): \n&nbsp;&nbsp;&nbsp;arondir_superieur( \n&nbsp;&nbsp;&nbsp; QEC boites decision / Colisage standard)  \n&nbsp; Sinon: 0 '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>QEC cartons décision</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.QEC_cartons_decision }} </td>
         </ng-container>
 
         <!-- QEC_final -->
         <ng-container matColumnDef="QEC_final">
-          <th mat-header-cell *matHeaderCellDef>QEC final</th>
+          <th mat-header-cell 
+          [matTooltip]="'QEC final: \n&nbsp; arondir_superieur( \n&nbsp;&nbsp;&nbsp; QEC cartons decision * Colisage standard )'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>QEC final</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.QEC_final }} </td>
         </ng-container>
 
         <!-- volume_commande -->
         <ng-container matColumnDef="volume_commande">
-          <th mat-header-cell *matHeaderCellDef>Volume de la commande</th>
+          <th mat-header-cell 
+          [matTooltip]="'Volume de la commande: \n&nbsp; vide'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Volume de la commande</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.volume_commande }} </td>
         </ng-container>
 
         <!-- poids_commande -->
         <ng-container matColumnDef="poids_commande">
-          <th mat-header-cell *matHeaderCellDef>Poids de la commande</th>
+          <th mat-header-cell 
+          [matTooltip]="'Poids de la commande: \n&nbsp; vide'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Poids de la commande</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.poids_commande }} </td>
         </ng-container>
 
         <!-- montant_decision -->
         <ng-container matColumnDef="montant_decision">
-          <th mat-header-cell *matHeaderCellDef>Montant decision</th>
+          <th mat-header-cell 
+          [matTooltip]="'Montant decision: \n&nbsp; arondir_superieur(PU * QEC final) \n\n&nbsp; PU: importé depuis Article'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>Montant decision</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.montant_decision }} </td>
         </ng-container>
 
         <!-- QEC_boites_propo_dirappro -->
         <ng-container matColumnDef="QEC_boites_propo_dirappro">
-          <th mat-header-cell *matHeaderCellDef>QEC boites propo dirappro</th>
+          <th mat-header-cell 
+          [matTooltip]="'QEC boites propo dirappro: \n&nbsp; Saisie manuelle'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>QEC boites propo dirappro</th>
           <td mat-cell *matCellDef="let article"> 
             <mat-form-field appearance="outline">
               <mat-label></mat-label>
@@ -196,74 +257,101 @@
 
         <!-- QEC_cartons_propo_dirrapro -->
         <ng-container matColumnDef="QEC_cartons_propo_dirrapro">
-          <th mat-header-cell *matHeaderCellDef>QEC cartons propo dirrapro</th>
+          <th mat-header-cell 
+          [matTooltip]="'QEC cartons propo dirrapro: \n&nbsp; Si ( \n&nbsp;(QEC boites propo dirappro != vide) ET \n&nbsp;(Colisage standard != 0) ) : \n&nbsp;&nbsp;&nbsp; arondir_superieur( \n&nbsp;&nbsp;&nbsp; QEC boites propo dirappro / Colisage standard) \n&nbsp; Sinon: vide '" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>QEC cartons propo dirrapro</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.QEC_cartons_propo_dirrapro }} </td>
         </ng-container>
 
-
         <!-- montant_propo_dirrapro -->
         <ng-container matColumnDef="montant_propo_dirrapro">
-          <th mat-header-cell *matHeaderCellDef>Montant propo dirrapro</th>
+          <th mat-header-cell
+          [matTooltip]="'Montant propo dirrapro: \n&nbsp; Si (QEC boites propo dirappro != vide): \n&nbsp;&nbsp;&nbsp; arondir_superieur(\n&nbsp;&nbsp;&nbsp; PU * QEC boites propo dirappro) \n&nbsp; Sinon: vide '" 
+          [matTooltipPosition]="'above'"  
+          *matHeaderCellDef>Montant propo dirrapro</th>
           <td mat-cell *matCellDef="let article"> {{ article.decision.montant_propo_dirrapro }} </td>
         </ng-container>
 
 
 
-
         <!--******************************   COLLISAGE   **************************-->
-
 
         <!-- poids -->
         <ng-container matColumnDef="poids">
-          <th mat-header-cell *matHeaderCellDef>Poids</th>
+          <th mat-header-cell
+          [matTooltip]="'Poids: \n&nbsp; Importé depuis Article'" 
+          [matTooltipPosition]="'above'"  
+          *matHeaderCellDef>Poids</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.poids }} </td>
         </ng-container>
 
         <!-- dimension -->
         <ng-container matColumnDef="dimension">
-          <th mat-header-cell *matHeaderCellDef>Dimension</th>
+          <th mat-header-cell
+          [matTooltip]="'Dimension: \n&nbsp; Importé depuis Article'" 
+          [matTooltipPosition]="'above'"   
+          *matHeaderCellDef>Dimension</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.dimension }} </td>
         </ng-container>
 
         <!-- pu_decision -->
         <ng-container matColumnDef="pu_decision">
-          <th mat-header-cell *matHeaderCellDef>PU decision</th>
+          <th mat-header-cell
+          [matTooltip]="'PU decision: \n&nbsp; PU: Importé depuis Article'" 
+          [matTooltipPosition]="'above'"    
+          *matHeaderCellDef>PU decision</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.pu_decision }} </td>
         </ng-container>
 
         <!-- dev_decision -->
         <ng-container matColumnDef="dev_decision">
-          <th mat-header-cell *matHeaderCellDef>DEV decision</th>
+          <th mat-header-cell
+          [matTooltip]="'DEV decision: \n&nbsp; DEV: Importé depuis Article'" 
+          [matTooltipPosition]="'above'"    
+          *matHeaderCellDef>DEV decision</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.dev_decision }} </td>
         </ng-container>
 
         <!-- collisage_decision -->
         <ng-container matColumnDef="collisage_decision">
-          <th mat-header-cell *matHeaderCellDef>Collisage décision</th>
+          <th mat-header-cell
+          [matTooltip]="'Collisage décision: \n&nbsp; Importé depuis Article'" 
+          [matTooltipPosition]="'above'"     
+          *matHeaderCellDef>Collisage décision</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.collisage_decision }} </td>
         </ng-container>
 
         <!-- FOB -->
         <ng-container matColumnDef="FOB">
-          <th mat-header-cell *matHeaderCellDef>FOB</th>
+          <th mat-header-cell
+          [matTooltip]="'FOB: \n&nbsp; vide'" 
+          [matTooltipPosition]="'above'" 
+          *matHeaderCellDef>FOB</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.FOB }} </td>
         </ng-container>
 
         <!-- coef -->
         <ng-container matColumnDef="coef">
-          <th mat-header-cell *matHeaderCellDef>coef</th>
+          <th mat-header-cell
+          [matTooltip]="'coef: \n&nbsp; Importé depuis Laboratoire'" 
+          [matTooltipPosition]="'above'"  
+          *matHeaderCellDef>coef</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.coef }} </td>
         </ng-container>
 
         <!-- prix_de_revient -->
         <ng-container matColumnDef="prix_de_revient">
-          <th mat-header-cell *matHeaderCellDef>Prix de revient</th>
+          <th mat-header-cell
+          [matTooltip]="'Prix de revient: \n&nbsp; Si (FOB != vide): FOB * coef \n&nbsp; Sinon: vide '" 
+          [matTooltipPosition]="'above'"   
+          *matHeaderCellDef>Prix de revient</th>
           <td mat-cell *matCellDef="let article"> {{ article.collisage.prix_de_revient }} </td>
         </ng-container>
 
       
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"  ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
 
       </table>
       

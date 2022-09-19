@@ -24,6 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
+
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSortModule,
     MatDialogModule,
     MatTabsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTooltipModule
   ],
   exports: [
     ReportComponent
